@@ -1,28 +1,19 @@
-document.addEventListener("DOMContentLoaded", function () {
-    var form = document.querySelector(".login-form");
+const form = document.querySelector(".login-form");
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-        let inputElements = form.querySelectorAll("input");
-        let inputElementsNames = [];
-        let inputElementsValue = [];
-        let inputObject = {};
+    const email = form.elements.email.value;
+    const password = form.elements.password.value;
 
-        for (let i = 0; i < inputElements.length; i++) {
-            inputElementsNames[i] = inputElements[i].getAttribute("name");
-            inputElementsValue[i] = form.elements[inputElementsNames[i]].value.trim();
+    if (email === "" || password === "") {
+        return alert("All form fields must be filled in")
+    } else {
+        const obj = {};
+        obj.email = email.trim();
+        obj.password = password.trim();
+        console.log(obj);
 
-            if (inputElementsValue[i] === "") {
-                alert("All form fields must be filled in");
-                // Помилка: функція не зупиняється, навіть якщо є порожнє поле
-                // return; ← цей return відсутній або закоментований
-            }
-
-            inputObject[inputElementsNames[i]] = inputElementsValue[i];
-        }
-        
         form.reset();
-        console.log(inputObject); // Завжди виводиться у консоль, навіть якщо є порожнє поле
-    });
-});
+    }
+}
